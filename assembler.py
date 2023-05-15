@@ -1,7 +1,5 @@
-# COPY OF OLD CODE + OUR MODIFICATIONS(LATEST)
 
 import sys
-# code = sys.stdin.read().splitlines()
 Line_Num = 1
 
 
