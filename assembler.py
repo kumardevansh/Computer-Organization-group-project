@@ -1,5 +1,7 @@
+# COPY OF OLD CODE + OUR MODIFICATIONS(LATEST)
 
 import sys
+# code = sys.stdin.read().splitlines()
 Line_Num = 1
 
 
@@ -346,10 +348,10 @@ def Input():
             sys.stdout.write(
                 f'{Array_Input.index(Array_Line)+1}: ERROR => Missing "hlt" Instruction in Last Line\n')
             
-    else:
-        if Array_Input[-1][0] != 'hlt':
-            sys.stdout.write(
-                f'{Array_Input.index(Array_Line)+1}: ERROR => Missing "hlt" Instruction in Last Line\n')
+    # else:
+    #     if Array_Input[-1][0] != 'hlt':
+    #         sys.stdout.write(
+    #             f'{Array_Input.index(Array_Line)+1}: ERROR => Missing "hlt" Instruction in Last Line\n')
             
 
     for Array_Line in Array_Input:
