@@ -31,7 +31,7 @@ def binary(n):
     return padded_binary_str
 
 
-def ftod(num):
+def ieee(num):
     pass
 
 
@@ -176,7 +176,7 @@ def typeB(strlist):
         sys.stdout.write(f'{Line_Num}: ERROR => Number is not between 0 and 127\n')
         
 
-    ans += binary(int(strlist[2][1:])) if strlist[0] == 'mov' else ftod(str(float(strlist[2][1:])))
+    ans += binary(int(strlist[2][1:])) if strlist[0] == 'mov' else ieee(str(float(strlist[2][1:])))
 
     return ans
 
