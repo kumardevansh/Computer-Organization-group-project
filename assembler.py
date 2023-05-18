@@ -85,6 +85,7 @@ def Type(strlist):
         return 'F'
     else:
         sys.stdout.write(f'{Line_Num}: ERROR => Instruction not Defined\n')
+        exit()
 
 
 
@@ -119,6 +120,7 @@ def typeA(strlist):
 
     if instr_code is None:
         sys.stdout.write(f'{Line_Num}: ERROR => Invalid Instruction\n')
+        exit()
         
     else:
         ans += instr_code
@@ -131,6 +133,7 @@ def typeA(strlist):
 
     if r1 is None or r2 is None or r3 is None:
         sys.stdout.write(f'{Line_Num}: ERROR => Register not Defined\n')
+        exit()
         
     else:
         ans += r1 + r2 + r3
@@ -159,6 +162,7 @@ def typeB(strlist):
 
     if strlist[0] not in instruction_codes:
         sys.stdout.write(f'{Line_Num}: ERROR => Invalid Instruction\n')
+        exit()
         
 
     ans = instruction_codes[strlist[0]]
@@ -166,14 +170,17 @@ def typeB(strlist):
     r1 = strlist[1]
     if r1 not in register_codes:
         sys.stdout.write(f'{Line_Num}: ERROR => Register not Defined\n')
+        exit()
         
     ans += '0' + register_codes[r1]
 
     if strlist[0] == 'mov' and (int(strlist[2][1:]) >= 127 or int(strlist[2][1:]) < 0):
         sys.stdout.write(f'{Line_Num}: ERROR => Number is not between 0 and 127\n')
+        exit()
         
     if strlist[0] == 'movf' and (int(strlist[2][1:]) >= 252 or int(strlist[2][1:]) < 0):
         sys.stdout.write(f'{Line_Num}: ERROR => Number is not between 0 and 127\n')
+        exit()
         
 
     ans += binary(int(strlist[2][1:])) if strlist[0] == 'mov' else ieee(str(float(strlist[2][1:])))
@@ -203,6 +210,7 @@ def typeC(strlist):
     
     if strlist[0] not in opcode_map:
         sys.stdout.write(f'{Line_Num}: ERROR => Invalid Instruction\n')
+        exit()
         
     
     opcode = opcode_map[strlist[0]]
@@ -210,12 +218,14 @@ def typeC(strlist):
     
     if strlist[1] not in register_map:
         sys.stdout.write(f'{Line_Num}: ERROR => Register not Defined\n')
+        exit()
         
     
     ans += register_map[strlist[1]]
     
     if strlist[2] not in register_map:
         sys.stdout.write(f'{Line_Num}: ERROR => Register not Defined\n')
+        exit()
         
     
     ans += register_map[strlist[2]]
@@ -231,6 +241,7 @@ def typeD(strlist, mem):
             return register_encodings[register_name]
         else:
             sys.stdout.write(f'{Line_Num}: ERROR => Register not Defined\n')
+            exit()
             
 
     def encode_ld_instruction(register_name, memory_data):
@@ -256,6 +267,7 @@ def typeD(strlist, mem):
         return encode_st_instruction(strlist[1], mem[1:])
     else:
         sys.stdout.write(f'{Line_Num}: ERROR => Invalid Instruction\n')
+        exit()
         
 
 
@@ -275,6 +287,7 @@ def typeE(strlist, mem):
     label = strlist[1]
     if label not in label_arr:
         sys.stdout.write(f'{Line_Num}: ERROR => Label not Defined\n')
+        exit()
         
 
     opcode = encode_jump_instruction(strlist[0])
@@ -292,7 +305,8 @@ def typeF(strlist):
         strF = '11010' + '0'*11
         return strF
     else:
-        sys.stdout.write(f'{Line_Num}: ERROR => Invalid Instruction\n')
+        sys.stdout.write(f'{Line_Num}: ERROR => hlt Instruction not found\n')
+        exit()
         
 
 def memory_label():
@@ -326,6 +340,7 @@ def Input():
                     else:
                         sys.stdout.write(
                             f'{Array_Input.index(Array_Line)+1}: ERROR => Instructions Written after "hlt" Instruction\n')
+                        exit()
                     
         else:
             if Array_Line[0] == 'hlt':
@@ -334,6 +349,7 @@ def Input():
                 else:
                     sys.stdout.write(
                         f'{Array_Input.index(Array_Line)+1}: ERROR => Instructions Written after "hlt" Instruction\n')
+                    exit()
                     
 
     for Array_Line in Array_Input:
@@ -341,17 +357,17 @@ def Input():
             # if len(Array_Line) == 1:
                 sys.stdout.write(
                     f'{Array_Input.index(Array_Line)+1}: ERROR => Invalid Instruction\n')
+                exit()
                 
-
-    if Array_Input[-1][0][-1] == ':' and Array_Input[-1][1] != 'hlt':
-        # if Array_Input[-1][1] != 'hlt':
-            sys.stdout.write(
-                f'{Array_Input.index(Array_Line)+1}: ERROR => Missing "hlt" Instruction in Last Line\n')
-            
-    # else:
-    #     if Array_Input[-1][0] != 'hlt':
-    #         sys.stdout.write(
-    #             f'{Array_Input.index(Array_Line)+1}: ERROR => Missing "hlt" Instruction in Last Line\n')
+    if Array_Input[-1][0][-1] == ':':
+            if Array_Input[-1][1] != 'hlt':
+                sys.stdout.write(f'{Array_Input.index(Array_Line)+1}: ERROR => Missing "hlt" Instruction in Last Line\n')
+                exit()
+    else:
+        if Array_Input[-1][0] != 'hlt':
+            sys.stdout.write(f'{Array_Input.index(Array_Line)+1}: ERROR => Missing "hlt" Instruction in Last Line\n')
+            exit()
+              
             
 
     for Array_Line in Array_Input:
@@ -386,6 +402,7 @@ def Output(Array_Input):
     for Array_Line in Array_Input:
         if len(Array_Line) > 5:
             sys.stdout.write(f'{Line_Num}: ERROR => Invalid Instruction\n')
+            exit()
             
 
         if Array_Line[0] == 'var':
@@ -395,9 +412,11 @@ def Output(Array_Input):
                 else:
                     sys.stdout.write(
                         f'{Line_Num}: ERROR => Variable Not Declared in Beginning\n')
+                    exit()
                     
             else:
                 sys.stdout.write(f'{Line_Num}: ERROR => Invalid Instruction\n')
+                exit()
                 
         else:
             flag = 1
@@ -438,6 +457,7 @@ def Output(Array_Input):
                     Array_Output.append(typeF(Array_Line))
             else:
                 sys.stdout.write(f'{Line_Num}: ERROR => Invalid Instruction\n')
+                exit()
                 
 
         if Array_Line[0] != 'var' and Array_Line[0][-1] == ':':
@@ -473,6 +493,7 @@ def Output(Array_Input):
                     Array_Output.append(typeF(Array_Line[1:]))
             else:
                 sys.stdout.write(f'{Line_Num}: ERROR => Invalid Instruction\n')
+                exit()
                 
 
         Line_Num += 1
