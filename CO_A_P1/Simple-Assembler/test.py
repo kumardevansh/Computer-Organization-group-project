@@ -1,7 +1,4 @@
-# COPY OF OLD CODE + OUR MODIFICATIONS(LATEST)
-
 import sys
-# code = sys.stdin.read().splitlines()
 Line_Num = 1
 
 
@@ -333,8 +330,6 @@ def Input():
 
     for Array_Line in Array_Input:
         if Array_Line[0][-1] == ':' and len(Array_Line) != 1 and Array_Line[1] == 'hlt':
-            # if len(Array_Line) != 1:
-            #     if Array_Line[1] == 'hlt':
                     if hlt_flag == 0:
                         hlt_flag = 1
                     else:
