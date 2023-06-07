@@ -374,7 +374,7 @@ def je(inp,count_pc):
 #***************************************************
 
 def count_pc_ret(count_pc):
-    print(count_pc,end=" ")
+    print(count_pc,end="        ")
 
 def MEM_ret():
     # v1=1
@@ -384,7 +384,7 @@ def MEM_ret():
 
 def RF():
     for i in reg.keys():
-        print(reg[i],end=" ")
+        print(reg[i],end="        ")
     print()
 
 def halt(count_pc):
