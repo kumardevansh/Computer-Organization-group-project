@@ -384,7 +384,7 @@ def MEM_ret():
 
 def RF():
     for i in reg.keys():
-        print(reg[i],end="        ")
+        print(reg[i],end=" ")
     print()
 
 def halt(count_pc):
