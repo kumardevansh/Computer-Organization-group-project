@@ -27,9 +27,45 @@ def binary(n):
     padded_binary_str = padding + binary_str
     return padded_binary_str
 
+def binaryOfFraction(fraction):
 
-def ieee(num):
-    pass
+    binary = str()
+    while (fraction):
+
+        fraction *= 2
+
+        if (fraction >= 1):
+            int_part = 1
+            fraction -= 1
+        else:
+            int_part = 0
+
+        binary += str(int_part)
+
+    return binary
+
+def ieee(real_no):
+
+    real_no = abs(real_no)
+    int_str = bin(int(real_no))[2:]
+
+    fraction_str = binaryOfFraction(real_no - int(real_no))
+
+    ind = int_str.index('1')
+
+    exp_str = bin((len(int_str) - ind - 1) + 3)[2:]
+
+    mant_str = int_str[ind + 1:] + fraction_str
+    if (len(mant_str)<5):
+        mant_str = mant_str + ('0' * (5 - len(mant_str)))
+    else:
+        mant_str = mant_str[ :5]
+
+    # exp_str, mant_str = ieee(real_no)
+
+    ieee_32 = exp_str + mant_str
+
+    return ieee_32
 
 
 def Type(strlist):
@@ -180,7 +216,7 @@ def typeB(strlist):
         exit()
         
 
-    ans += binary(int(strlist[2][1:])) if strlist[0] == 'mov' else ieee(str(float(strlist[2][1:])))
+    ans += binary(int(strlist[2][1:])) if strlist[0] == 'mov' else ieee(float(strlist[2][1:]))
 
     return ans
 
