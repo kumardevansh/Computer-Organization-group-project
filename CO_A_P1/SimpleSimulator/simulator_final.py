@@ -374,7 +374,7 @@ def je(inp,count_pc):
 #***************************************************
 
 def count_pc_ret(count_pc):
-    print(count_pc,end=" ")
+    print(count_pc,end="        ")
 
 def MEM_ret():
     # v1=1
