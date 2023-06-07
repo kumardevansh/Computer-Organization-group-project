@@ -1,3 +1,4 @@
 #!/bin/bash
 
 python3 Simulator.py
+python3 simulator_final.py
